@@ -80,11 +80,11 @@ class HelloController extends Controller
 
   public function show(Request $request)
   {
-    $name = $request->name;
+    $min = $request->min;
+    $max = $request->max;
     $items = DB::table('people')
-    ->where('name', 'like', '%' . $name . '%')
-    ->orWhere('mail', 'like', '%' . $name . '%')
-    ->get();
+    // ?の部分にパラメータ配列の値がはめ込まれている
+    ->whereRaw('age >= ? and age <= ?', [$min,$max])->get();
     return view('hello.show', ['items' => $items]);
   }
 }
