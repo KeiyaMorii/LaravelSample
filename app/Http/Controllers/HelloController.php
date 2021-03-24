@@ -81,11 +81,10 @@ class HelloController extends Controller
 
   public function show(Request $request)
   {
-    $min = $request->min;
-    $max = $request->max;
+    $page = $request->page;
     $items = DB::table('people')
-    // ?の部分にパラメータ配列の値がはめ込まれている
-    ->whereRaw('age >= ? and age <= ?', [$min,$max])->get();
+    // offsetで$page * 3の位置に移動し、limitで３つだけレコードを取得する
+    ->offset($page * 3)->limit(3)->get();
     return view('hello.show', ['items' => $items]);
   }
 }
