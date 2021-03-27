@@ -20,7 +20,8 @@ class PersonController extends Controller
 
     public function search(Request $request)
     {
-        $item = Person::find($request->input);
+        // nameの値が$request->inputと同じ条件を設定、firstを呼び出して最初のレコードを取得
+        $item = Person::where('name', $request->input)->first();
         $param = ['input' => $request->input, 'item' => $item];
         return view('person.find', $param);
     }
