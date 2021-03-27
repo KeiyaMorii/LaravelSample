@@ -20,9 +20,9 @@ class PersonController extends Controller
 
     public function search(Request $request)
     {
-        // スコープ用に用意したメソッドを呼び出す場合は、メソッド名の最初のscopeは不要
-        // 第１引数の$queryも用意する必要はない
-        $item = Person::nameEqual($request->input)->first();
+        $min = $request->input * 1;
+        $max = $min + 10;
+        $item = Person::ageGreaterThan($min)->ageLessThan($max)->first();
         $param = ['input' => $request->input, 'item' => $item];
         return view('person.find', $param);
     }
