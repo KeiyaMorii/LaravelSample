@@ -25,9 +25,9 @@ class Person extends Model
         return $this->id . ': ' . $this->name . '(' . $this->age . ')';
     }
 
-    public function board()
+    // 複数のレコードと関連付けられるので、メソッド名は「boards」と複数形にする
+    public function boards()
     {
-        // hasOneはモデルから引数に指定したモデルへの関連付けを設定する
-        return $this->hasOne('App\Models\Board');
+        return $this->hasMany('App\Models\Board');
     }
 }

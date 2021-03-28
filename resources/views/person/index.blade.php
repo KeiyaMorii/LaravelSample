@@ -13,8 +13,13 @@
     @foreach ($items as $item)
         <tr>
             <td>{{$item->getData()}}</td>
-            <td>@if ($item->board != null)
-                {{$item->board->getData()}}
+            <td>
+                @if ($item->boards != null) <!-- $item->boardsがnullでなければ繰り返し処理を行う -->
+                <table width="100%">
+                @foreach ($item->boards as $obj)
+                    <tr><td>{{$obj->getData()}}</td></tr>
+                @endforeach
+                </table>
                 @endif
             </td>
         </tr>
