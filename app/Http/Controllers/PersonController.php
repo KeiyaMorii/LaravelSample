@@ -45,4 +45,22 @@ class PersonController extends Controller
         $person->fill($form)->save();
         return redirect('/person');
     }
+
+    public function edit(Request $request)
+    {
+        // Person::findを使ってidパラメータの値のモデルを取得し、これをformという値に設定している
+        $person = Person::find($request->id);
+        return view('person.edit', ['form' => $person]);
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, Person::$rules);
+        // Person::findでインスタンスを用意する
+        $person = Person::find($request->id);
+        $form = $request->all();
+        unset($form['_token']);
+        $person->fill($form)->save();
+        return redirect('/person');
+    }
 }
