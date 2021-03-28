@@ -19,6 +19,12 @@ class Board extends Model
 
     public function getData()
     {
-        return $this->id . ': ' .  $this->title;
+        // belongsToによりpersonの情報が取り出せるようになる
+        return $this->id . ': ' .  $this->title . ' (' . $this->person->name . ')';
+    }
+
+    public function person()
+    {
+        return $this->belongsTo('App\Models\Person');
     }
 }
