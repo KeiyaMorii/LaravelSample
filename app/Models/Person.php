@@ -24,4 +24,10 @@ class Person extends Model
     {
         return $this->id . ': ' . $this->name . '(' . $this->age . ')';
     }
+
+    public function board()
+    {
+        // hasOneはモデルから引数に指定したモデルへの関連付けを設定する
+        return $this->hasOne('App\Models\Board');
+    }
 }
