@@ -90,4 +90,21 @@ class HelloController extends Controller
   {
     return view('hello.rest');
   }
+
+  // /hello/sessiionにアクセスしたときの処理
+  public function ses_get(Request $request)
+  {
+    // セッションから「msg」という値を取り出す,session_dataという名前でテンプレートに渡している
+    $sesdata = $request->session()->get('msg');
+    return view('hello.session', ['session_data' => $sesdata]);
+  }
+
+  // /hello/sessiionにフォームをPOST送信したときの処理
+  public function ses_put(Request $request)
+  {
+    $msg = $request->input; // 値を取り出す
+    // $msgの値が'msg'という名前でセッションに保管される
+    $request->session()->put('msg', $msg);
+    return redirect('hello/session');
+  }
 }
