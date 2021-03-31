@@ -7,13 +7,13 @@ use Illuminate\Http\Response; // Responseを使用できるようにする
 use App\Http\Requests\HelloRequest;// FormRequestを使用できるようにする
 use Validator; // バリデータを使用できるようにする
 use Illuminate\Support\Facades\DB;
+use App\Person;
 
 class HelloController extends Controller
 {
   public function index(Request $request)
   {
-    // ※ orderByメソッドの呼び出し場所はgetメソッドの前に書く
-    $items = DB::table('people')->orderBy('age', 'asc')->get();
+    $items = DB::table('people')->simplePaginate(5); // 5項目ずつレコードを取り出して表示する
     return view('hello.index', ['items' => $items]);
   }
 
