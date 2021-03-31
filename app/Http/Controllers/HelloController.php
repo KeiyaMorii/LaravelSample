@@ -15,7 +15,7 @@ class HelloController extends Controller
   {
     $sort = $request->sort;
     //$items = DB::table('people')->orderByt($sort, 'asc')->simplePaginate(5); DBクラスを利用した場合の書き方
-    $items = Person::orderBy($sort, 'asc')->simplePaginate(5); // orderBy->$request->sortの値を取り出している
+    $items = Person::orderBy($sort, 'asc')->Paginate(5); // orderBy->$request->sortの値を取り出している
     $param = ['items' => $items, 'sort' => $sort];
     return view('hello.index', $param);
   }
