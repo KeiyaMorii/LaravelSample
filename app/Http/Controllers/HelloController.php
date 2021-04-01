@@ -8,15 +8,16 @@ use App\Http\Requests\HelloRequest;// FormRequestを使用できるようにす�
 use Validator; // バリデータを使用できるようにする
 use Illuminate\Support\Facades\DB;
 use App\Models\Person;
+use Illuminate\Support\Facades\Auth;
 
 class HelloController extends Controller
 {
   public function index(Request $request)
   {
+    $user = Auth::user(); // ログインしているユーザーのモデルインスタンス(AuthではUserというモデルクラス)を返す
     $sort = $request->sort;
-    //$items = DB::table('people')->orderByt($sort, 'asc')->simplePaginate(5); DBクラスを利用した場合の書き方
-    $items = Person::orderBy($sort, 'asc')->Paginate(5); // orderBy->$request->sortの値を取り出している
-    $param = ['items' => $items, 'sort' => $sort];
+    $items = Person::orderBy($sort, 'asc')->simplePaginate(5);
+    $param = ['items' => $items, 'sort' => $sort, 'user' => $user];
     return view('hello.index', $param);
   }
 
