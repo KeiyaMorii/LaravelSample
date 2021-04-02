@@ -31,6 +31,17 @@ class UserFactory extends Factory
         ];
     }
 
+    protected $model = App\Person::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'mail' => $this->faker->nuique()->safeEmail,
+            'age' => random_int(1,99),
+        ];
+    }
+
     /**
      * Indicate that the model's email address should be unverified.
      *

@@ -63,7 +63,7 @@ class HelloController extends Controller
       'mail' => $request->mail,
       'age' => $request->age,
     ];
-    // ※　whereしないでtableから直接updateを呼び出すと、すべてのレコードの内容を更新するので注意！！
+    // ※ whereしないでtableから直接updateを呼び出すと、すべてのレコードの内容を更新するので注意！！
     DB::table('people')->where('id', $request->id)->update($param);
     return redirect('/hello');
   }
@@ -76,7 +76,7 @@ class HelloController extends Controller
 
   public function remove(Request $request)
   {
-    // ※　whereを付けずにDB::tableから直接deleteを呼び出すと全レコードを削除してしまうので注意！！
+    // ※ whereを付けずにDB::tableから直接deleteを呼び出すと全レコードを削除してしまうので注意！！
     DB::table('people')->where('id', $request->id)->delete();
     return redirect('/hello');
   }
@@ -110,5 +110,23 @@ class HelloController extends Controller
     // $msgの値が'msg'という名前でセッションに保管される
     $request->session()->put('msg', $msg);
     return redirect('hello/session');
+  }
+
+  public function getAuth(Request $request)
+  {
+    $param = ['message' => 'ログインして下さい。'];
+    return view('hello.auth', $param);
+  }
+
+  public function postAuth(Request $request)
+  {
+    $email = $request->email;
+    $password = $request->password;
+    if (Auth::attempt(['email' => $email, 'password' => $password])) {
+      $msg = 'ログインしました。(' . Auth::user()->name . ')';
+    } else {
+      $msg = 'ログインに失敗しました。';
+    }
+    return view('hello.auth', ['message' => $msg]);
   }
 }
