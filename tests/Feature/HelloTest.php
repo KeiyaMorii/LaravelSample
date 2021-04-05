@@ -34,7 +34,7 @@ class HelloTest extends TestCase
            'mail' => 'YYY@ZZZ.COM',
            'age' => 123,
        ]);
-       factory(Person::class 10)->create();
+       factory(Person::class, 10)->create();
 
        $this->assertDatabaseHas('people', [
            'name' => 'XXX',
