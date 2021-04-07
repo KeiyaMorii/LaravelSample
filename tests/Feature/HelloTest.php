@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use App\Person;
+use App\Models\Person;
 
 class HelloTest extends TestCase
 {
@@ -15,12 +15,12 @@ class HelloTest extends TestCase
    public function testHello()
    {
        // ダミーで利用するデータ
-       \App\Models\Article::factory(Person::class)->create([
+       \App\Models\Person::factory()->create([
            'name' => 'XXX',
            'mail' => 'YYY@ZZZ.COM',
            'age' => 123,
        ]);
-       \App\Models\Article::factory(Person::class, 10)->create();
+       \App\Models\Person::factory(10)->create();
 
        $this->assertDatabaseHas('people', [
            'name' => 'XXX',
