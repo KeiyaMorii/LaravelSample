@@ -22,8 +22,8 @@ class PersonFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->facker->name,
-            'mail' => $this->facker->safeEmail,
+            'name' => $this->faker->name,
+            'mail' => $this->faker->safeEmail,
             'age' => random_int(1,99),
         ];
     }

@@ -32,7 +32,7 @@ class UserFactory extends Factory
         ];
     }
 
-    /*protected $model = App\Person::class;
+    protected $model = App\Person::class;
 
     public function definition()
     {
